@@ -5,7 +5,9 @@
   "main": "swag-tag-mwc.js",
   "module": "swag-tag-mwc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "es-dev-server --app-index demo/dev.html --node-resolve --watch --open",
+    "example1": "wca analyze mwc-textfield-example1.js --outFile mwc-textfield-example1.json"
   },
   "dependencies": {
     "trans-render": "0.0.239",
@@ -17,6 +19,9 @@
     "@material/mwc-list": "0.18.0",
     "@material/mwc-textfield": "0.18.0",
     "swag-tag": "0.0.23"
+  },
+  "devDependencies": {
+    "es-dev-server": "1.57.2"
   },
   "repository": {
     "type": "git",

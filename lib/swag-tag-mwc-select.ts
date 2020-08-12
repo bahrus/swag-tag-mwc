@@ -1,8 +1,6 @@
-import {SwagTagPrimitiveBase} from './swag-tag-primitive-base.js';
-import {define, AttributeProps, mergeProps} from 'xtal-element/XtalElement.js';
+import {SwagTagPrimitiveBase} from 'swag-tag/lib/swag-tag-primitive-base.js';
+import {define, AttributeProps, mergeProps, RenderContext, SelectiveUpdate} from 'xtal-element/XtalElement.js';
 import {createTemplate} from 'trans-render/createTemplate.js';
-import { RenderContext } from '../trans-render/types2.js';
-import { SelectiveUpdate } from '../xtal-element/types.js';
 import("@material/mwc-select/mwc-select.js");
 import("@material/mwc-list/mwc-list-item.js");
 

@@ -1,8 +1,7 @@
-import {SwagTagPrimitiveBase} from './swag-tag-primitive-base.js';
+import {SwagTagPrimitiveBase} from 'swag-tag/lib/swag-tag-primitive-base.js';
 import {SelectiveUpdate} from 'xtal-element/types.d.js';
 import {define} from 'xtal-element/XtalElement.js';
 import {createTemplate} from 'trans-render/createTemplate.js';
-import { SwagTagMWCTextField } from './swag-tag-mwc-textfield.js';
 
 import("@material/mwc-checkbox/mwc-checkbox.js");
 import("@material/mwc-formfield/mwc-formfield.js");

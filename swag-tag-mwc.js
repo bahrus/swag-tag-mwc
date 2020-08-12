@@ -1,16 +1,15 @@
-import { SwagTagBase, uiRefs, bindName, addEventListeners, linkWcInfo, triggerImportReferencedModule, adjustValueAndType, bindSelf, showHideEditor, linkInnerTemplate, copyPropInfoIntoEditor } from './swag-tag-base.js';
+import { SwagTag, uiRefs, bindName, addEventListeners, linkWcInfo, triggerImportReferencedModule, adjustValueAndType, bindSelf, showHideEditor, linkInnerTemplate, copyPropInfoIntoEditor } from 'swag-tag/swag-tag.js';
 import { define } from 'xtal-element/XtalElement.js';
-import { SwagTagMWCTextField } from './swag-tag-mwc-textfield.js';
-import { SwagTagMWCCheckbox } from './swag-tag-mwc-checkbox.js';
-//import {SwagTagMWCTextarea} from './swag-tag-mwc-textarea.js';
-import { SwagTagJsonEditor } from './swag-tag-json-editor.js';
-import { SwagTagMWCSelect } from './swag-tag-mwc-select.js';
+import { SwagTagMWCTextField } from './lib/swag-tag-mwc-textfield.js';
+import { SwagTagMWCCheckbox } from './lib/swag-tag-mwc-checkbox.js';
+import { SwagTagJsonEditor } from 'swag-tag/lib/swag-tag-json-editor.js';
+import { SwagTagMWCSelect } from './lib/swag-tag-mwc-select.js';
 const copyPropInfoIntoEditors = {
     [`${SwagTagMWCTextField.is},${SwagTagMWCCheckbox.is},${SwagTagJsonEditor.is},${SwagTagMWCSelect.is}`]: copyPropInfoIntoEditor,
 };
 export const addEditors = ({ massagedProps, name }) => ({
     // Loop over massagedProps, and insert dynamic editor via tag name (item.editor is the tag name)
-    [uiRefs.ffScrollableArea]: [
+    [uiRefs.scrollableArea]: [
         //Array to loop over
         massagedProps || [],
         //A **toTagOrTemplate** function that returns a string -- used to generate a (custom element) with the name of the string.
@@ -56,7 +55,7 @@ const updateTransforms = [
     addEditors,
     bindSelf,
 ];
-export class SwagTagMWC extends SwagTagBase {
+export class SwagTagMWC extends SwagTag {
     constructor() {
         super(...arguments);
         this.updateTransforms = updateTransforms;

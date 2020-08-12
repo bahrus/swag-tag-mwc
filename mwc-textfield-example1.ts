@@ -1,5 +1,4 @@
 import {TextField} from "@material/mwc-textfield/mwc-textfield.js";
-import {css} from 'lit-element/lit-element.js';
 
 /**
  * @element mwc-textfield-example1
