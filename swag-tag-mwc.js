@@ -11,7 +11,7 @@ export const addEditors = ({ massagedProps, name }) => ({
     // Loop over massagedProps, and insert dynamic editor via tag name (item.editor is the tag name)
     [uiRefs.scrollableArea]: [
         //Array to loop over
-        massagedProps || [],
+        massagedProps,
         //A **toTagOrTemplate** function that returns a string -- used to generate a (custom element) with the name of the string.
         ({ item }) => item.editor,
         //empty range

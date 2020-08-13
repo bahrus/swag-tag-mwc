@@ -48,7 +48,8 @@ export class SwagTagMWCSelect extends SwagTagPrimitiveBase{
     mainTemplate = mainTemplate;
     initTransform = initTransform;
     updateTransforms = [updateOptions, updateSelect] as SelectiveUpdate<any>[];
-    handleSelected(e: Event){
+    handleSelected(e: CustomEvent){
+        this.editedValue = (<any>e.target!).value;
     }
     options: string[] | undefined;
 }

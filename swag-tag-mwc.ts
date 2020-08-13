@@ -19,7 +19,7 @@ export const addEditors =   ({massagedProps, name}: SwagTag) => ({
     // Loop over massagedProps, and insert dynamic editor via tag name (item.editor is the tag name)
     [uiRefs.scrollableArea]: [
       //Array to loop over
-      massagedProps || [], 
+      massagedProps, 
       //A **toTagOrTemplate** function that returns a string -- used to generate a (custom element) with the name of the string.
       ({item}: RenderContext) => (<any>item).editor,
       //empty range
