@@ -60,13 +60,19 @@ main {
   margin: 0 8px;
 }
 
+div[part="mwcButtonContainer"] div {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+}
+
     </style>
     <slot name=linkList part=linksSlot style=display:none></slot>
     <mwc-drawer hasheader type="modal" open>
-        <span slot="title">Drawer Title</span>
-        <span slot="subtitle">subtitle</span>
+        <span slot="title">Catalog</span>
+        <span slot="subtitle">components</span>
         <div class="drawer-content">
-            <p>Drawer content</p>
+            <p>Demos</p>
             <div part=mwcButtonContainer></div>
             <!-- <mwc-icon-button icon="device_hub" title="" data-href=></mwc-icon-button>
             <mwc-icon-button icon="gavel" id="gavel"></mwc-icon-button> -->
@@ -103,13 +109,16 @@ const linkLinks = ({ linkAssignedNodes, self }) => {
     self.links = links;
 };
 const drawerButton = createTemplate(/* html */ `
-<mwc-icon-button icon="device_hub" title=""></mwc-icon-button>
+<div part=buttonContainer class=>
+<mwc-icon-button icon="device_hub"></mwc-icon-button><span></span>
+</div>
 `);
 const bindLinks = ({ links }) => ({
     [uiRefs.mwcButtonContainer]: [links, drawerButton, , {
-            'mwc-icon-button': ({ target, item }) => {
-                target.dataset.href = item.href;
-            }
+            div: ({ target, item }) => ({
+                'mwc-icon-button': [{ dataset: { href: item.href } }],
+                'span': [{ textContent: item.textContent }],
+            })
         }],
 });
 const updateTransforms = [
