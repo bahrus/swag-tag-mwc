@@ -12,12 +12,14 @@
   "dependencies": {
     "trans-render": "0.0.242",
     "xtal-element": "0.0.270",
+    "xtal-fetch": "0.0.83",
     "@material/mwc-textarea": "0.18.0",
     "@material/mwc-formfield": "0.18.0",
     "@material/mwc-checkbox": "0.18.0",
     "@material/mwc-select": "0.18.0",
     "@material/mwc-list": "0.18.0",
     "@material/mwc-textfield": "0.18.0",
+    "@material/mwc-drawer": "0.18.0",
     "swag-tag": "0.0.25"
   },
   "devDependencies": {

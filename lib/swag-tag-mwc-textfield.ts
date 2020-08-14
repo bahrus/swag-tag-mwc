@@ -23,8 +23,12 @@ const initTransform = ({self}: SwagTagMWCTextField) => ({
 });
 
 const updateInput = ({readOnly, inputType, disabled, value, name, description}: SwagTagMWCTextField) =>({
-    [mwcTxtFld]: [{'readonly': readOnly, type: inputType, disabled: disabled, value: value, label: name, helper: description},,]
+    [mwcTxtFld]: [{readOnly: readOnly, type: inputType, disabled: disabled, value: value, label: name, helper: description}]
 });
+
+const updateTransforms = [
+    updateInput
+]  as SelectiveUpdate<any>[];
 
 export const linkInputType = ({type, self}: SwagTagMWCTextField) => {
     switch(type){
@@ -41,6 +45,10 @@ export const linkEditedValue = ({value, self}: SwagTagMWCTextField) => {
     self.editedValue = value;
 }
 
+const propActions = [
+    linkInputType, linkEditedValue
+];
+
 export class SwagTagMWCTextField extends SwagTagPrimitiveBase{
     static is = 'swag-tag-mwc-textfield';
     
@@ -48,12 +56,8 @@ export class SwagTagMWCTextField extends SwagTagPrimitiveBase{
 
     initTransform = initTransform;
 
-    updateTransforms = [
-        updateInput
-    ]  as SelectiveUpdate<any>[];
+    updateTransforms = updateTransforms
 
-    propActions = [
-        linkInputType, linkEditedValue
-    ];
+    propActions = propActions;
 }
 define(SwagTagMWCTextField);
