@@ -67,6 +67,11 @@ div[part="mwcButtonContainer"] div {
     align-items:center;
 }
 
+[part="demoWindow"]{
+    height:calc(100vh - 150px);
+    width:100%;
+}
+
     </style>
     <slot name=linkList part=linksSlot style=display:none></slot>
     <mwc-drawer hasheader type="modal" open>
@@ -87,7 +92,7 @@ div[part="mwcButtonContainer"] div {
                 <mwc-icon-button slot="actionItems" icon="fingerprint"></mwc-icon-button>
             </mwc-top-app-bar>
             <div class="main-content">
-                <iframe -src></iframe>
+                <iframe -src part=demoWindow></iframe>
             </div>
         </div>
         
