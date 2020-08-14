@@ -6,6 +6,7 @@ import { templStampSym } from 'trans-render/plugins/templStamp.js';
 import('./swag-tag-mwc');
 import('@material/mwc-top-app-bar/mwc-top-app-bar.js');
 import('@material/mwc-icon-button/mwc-icon-button.js');
+import('p-et-alia/p-d.js');
 const mainTemplate = createTemplate(/* html */ `
     <style>
         :host {
@@ -71,13 +72,14 @@ div[part="mwcButtonContainer"] div {
     <mwc-drawer hasheader type="modal" open>
         <span slot="title">Catalog</span>
         <span slot="subtitle">components</span>
-        <div class="drawer-content">
+        <div class="drawer-content" part=drawerContent>
             <p>Demos</p>
             <div part=mwcButtonContainer></div>
+            <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of=iframe[-src] val=target.dataset.href></p-d>
             <!-- <mwc-icon-button icon="device_hub" title="" data-href=></mwc-icon-button>
             <mwc-icon-button icon="gavel" id="gavel"></mwc-icon-button> -->
         </div>
-        <div slot="appContent">
+        <div slot="appContent" part=appContent>
             <mwc-top-app-bar>
                 <mwc-icon-button slot="navigationIcon" icon="menu"></mwc-icon-button>
                 <div slot="title">Title</div>
@@ -85,7 +87,7 @@ div[part="mwcButtonContainer"] div {
                 <mwc-icon-button slot="actionItems" icon="fingerprint"></mwc-icon-button>
             </mwc-top-app-bar>
             <div class="main-content">
-                <xtal-fetch-req fetch -href as=text part=fetch insert-results></xtal-fetch-req>
+                <iframe -src></iframe>
             </div>
         </div>
         

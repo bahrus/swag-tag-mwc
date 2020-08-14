@@ -22,7 +22,8 @@
     "@material/mwc-drawer": "0.18.0",
     "@material/mwc-top-app-bar": "0.18.0",
     "@material/mwc-icon-button": "0.18.0",
-    "swag-tag": "0.0.29"
+    "swag-tag": "0.0.29",
+    "p-et-alia": "0.0.111"
   },
   "devDependencies": {
     "es-dev-server": "1.57.2"
