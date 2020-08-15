@@ -88,17 +88,19 @@ const mainTemplate = createTemplate(/* html */`
     <span slot="subtitle">components</span>
     <div class="drawer-content" part=drawerContent>
         <p>Demos</p>
-        <div part=mwcButtonContainer disabled=2></div>
+        <div part=mwcButtonContainer disabled=4></div>
         <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of=iframe[-src] val=target.dataset.href></p-d>
         <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of=[-text-content] val=target.title></p-d>
+        <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of='[icon="code"][-data-href]' val=target.dataset.code as-attr></p-d>
+        <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of='[icon="info"][-data-href]' val=target.dataset.info as-attr></p-d>
     </div>
     <div slot="appContent" part=appContent>
         <mwc-top-app-bar>
             <mwc-icon-button slot="navigationIcon" icon="menu" part=navigationIcon data-msg1=true></mwc-icon-button>
             <p-u on=click to-closest=mwc-drawer val=target.dataset.msg1 prop=open parse-value-as=bool></p-u>
             <div slot="title" -text-content>Title</div>
-            <mwc-icon-button slot="actionItems" icon="cast"></mwc-icon-button>
-            <mwc-icon-button slot="actionItems" icon="fingerprint"></mwc-icon-button>
+            <mwc-icon-button slot="actionItems" icon="code" title="Code Repository" role=link part=codeLink -data-href></mwc-icon-button>
+            <mwc-icon-button slot="actionItems" icon="info" title="Documentation" role=link part=documentationLink -data-href></mwc-icon-button>
         </mwc-top-app-bar>
         <div class="main-content">
             <iframe -src part=demoWindow></iframe>
@@ -108,11 +110,13 @@ const mainTemplate = createTemplate(/* html */`
 </mwc-drawer>
     
 `);
-const uiRefs = { fetch: p, linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p, navigationIcon: p };
+const uiRefs = { fetch: p, linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p, navigationIcon: p, codeLink: p, documentationLink: p };
 symbolize(uiRefs);
-const initTransform = ({ onLinksSlotChange }: SwagTagCatalogMWC) => ({
+const initTransform = ({ onLinksSlotChange, onLinkButtonClick }: SwagTagCatalogMWC) => ({
     ':host': [templStampSym, uiRefs],
     [uiRefs.linksSlot]: [{}, { slotchange: onLinksSlotChange }],
+    [uiRefs.codeLink]: [{}, {click:[onLinkButtonClick, 'dataset.href']}],
+    [uiRefs.documentationLink]: [{}, {click:[onLinkButtonClick, 'dataset.href']}],
 } as TransformValueOptions);
 
 const linkLinks = ({ linkAssignedNodes, self }: SwagTagCatalogMWC) => {
@@ -134,7 +138,14 @@ const drawerButton = createTemplate(/* html */`
 const bindLinks = ({links}: SwagTagCatalogMWC) =>({
     [uiRefs.mwcButtonContainer]: [links, drawerButton,,{
         div: ({item}: RenderContext<SwagTagCatalogMWC, HTMLAnchorElement>) => ({
-            'mwc-icon-button': [{title:item!.textContent, dataset:{href:item!.href, }}],
+            'mwc-icon-button': [{
+                title:item!.textContent, 
+                dataset:{
+                    href:item!.href,
+                    code:item!.dataset.code, 
+                    info:item!.dataset.info
+                }
+            }],
             'span': [{textContent:item!.textContent}],
         }) 
     }],
@@ -164,7 +175,9 @@ export class SwagTagCatalogMWC extends XtalElement {
     onLinksSlotChange() {
         this.linkAssignedNodes = (<any>this)[uiRefs.linksSlot].assignedNodes();
     }
-
+    onLinkButtonClick(href: string){
+        window.open(href, '_blank');
+    }
 }
 
 define(SwagTagCatalogMWC);
