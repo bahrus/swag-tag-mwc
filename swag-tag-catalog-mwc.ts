@@ -130,6 +130,9 @@ const linkLinks = ({ linkAssignedNodes, self }: SwagTagCatalogMWC) => {
     });
     self.links = links;
 }
+const propActions = [
+    linkLinks,
+];
 const drawerButton = createTemplate(/* html */`
 <div part=buttonContainer>
     <mwc-icon-button icon="device_hub"></mwc-icon-button><span></span>
@@ -153,9 +156,7 @@ const bindLinks = ({links}: SwagTagCatalogMWC) =>({
 const updateTransforms = [
     bindLinks,
 ] as SelectiveUpdate<any>[];
-const propActions = [
-    linkLinks,
-];
+
 
 
 

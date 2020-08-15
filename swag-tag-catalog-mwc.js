@@ -125,6 +125,9 @@ const linkLinks = ({ linkAssignedNodes, self }) => {
     });
     self.links = links;
 };
+const propActions = [
+    linkLinks,
+];
 const drawerButton = createTemplate(/* html */ `
 <div part=buttonContainer>
     <mwc-icon-button icon="device_hub"></mwc-icon-button><span></span>
@@ -147,9 +150,6 @@ const bindLinks = ({ links }) => ({
 });
 const updateTransforms = [
     bindLinks,
-];
-const propActions = [
-    linkLinks,
 ];
 export class SwagTagCatalogMWC extends XtalElement {
     constructor() {
