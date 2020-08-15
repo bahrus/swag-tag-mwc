@@ -1,4 +1,4 @@
-import("@material/mwc-drawer/mwc-drawer.js");
+
 import { XtalElement, define, AttributeProps, TransformGetter, SelectiveUpdate, RenderContext, symbolize, p } from 'xtal-element/XtalElement.js';
 import { createTemplate } from 'trans-render/createTemplate.js';
 import('xtal-fetch/xtal-fetch-req.js');
@@ -8,6 +8,7 @@ import { SwagTag } from '../swag-tag/swag-tag';
 import('./swag-tag-mwc');
 import('@material/mwc-top-app-bar/mwc-top-app-bar.js');
 import('@material/mwc-icon-button/mwc-icon-button.js');
+import('@material/mwc-drawer/mwc-drawer.js');
 import('p-et-alia/p-d.js');
 import('p-et-alia/p-u.js');
 
