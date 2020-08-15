@@ -7,6 +7,7 @@ import('./swag-tag-mwc');
 import('@material/mwc-top-app-bar/mwc-top-app-bar.js');
 import('@material/mwc-icon-button/mwc-icon-button.js');
 import('p-et-alia/p-d.js');
+import('p-et-alia/p-u.js');
 const mainTemplate = createTemplate(/* html */ `
 <style>
     :host {
@@ -89,7 +90,8 @@ const mainTemplate = createTemplate(/* html */ `
     </div>
     <div slot="appContent" part=appContent>
         <mwc-top-app-bar>
-            <mwc-icon-button slot="navigationIcon" icon="menu"></mwc-icon-button>
+            <mwc-icon-button slot="navigationIcon" icon="menu" part=navigationIcon data-msg1=true></mwc-icon-button>
+            <p-u on=click to-closest=mwc-drawer val=target.dataset.msg1 prop=open parse-value-as=bool></p-u>
             <div slot="title" -text-content>Title</div>
             <mwc-icon-button slot="actionItems" icon="cast"></mwc-icon-button>
             <mwc-icon-button slot="actionItems" icon="fingerprint"></mwc-icon-button>
@@ -102,9 +104,9 @@ const mainTemplate = createTemplate(/* html */ `
 </mwc-drawer>
     
 `);
-const uiRefs = { fetch: p, linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p };
+const uiRefs = { fetch: p, linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p, navigationIcon: p };
 symbolize(uiRefs);
-const initTransform = ({ onLinksSlotChange }) => ({
+const initTransform = ({ onLinksSlotChange, openDrawer }) => ({
     ':host': [templStampSym, uiRefs],
     [uiRefs.linksSlot]: [{}, { slotchange: onLinksSlotChange }],
 });
@@ -150,6 +152,9 @@ export class SwagTagCatalogMWC extends XtalElement {
     }
     onLinksSlotChange() {
         this.linkAssignedNodes = this[uiRefs.linksSlot].assignedNodes();
+    }
+    openDrawer() {
+        this[uiRefs.drawer].open = true;
     }
 }
 SwagTagCatalogMWC.is = 'swag-tag-catalog-mwc';
