@@ -106,7 +106,7 @@ const mainTemplate = createTemplate(/* html */ `
 `);
 const uiRefs = { fetch: p, linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p, navigationIcon: p };
 symbolize(uiRefs);
-const initTransform = ({ onLinksSlotChange, openDrawer }) => ({
+const initTransform = ({ onLinksSlotChange }) => ({
     ':host': [templStampSym, uiRefs],
     [uiRefs.linksSlot]: [{}, { slotchange: onLinksSlotChange }],
 });
@@ -152,9 +152,6 @@ export class SwagTagCatalogMWC extends XtalElement {
     }
     onLinksSlotChange() {
         this.linkAssignedNodes = this[uiRefs.linksSlot].assignedNodes();
-    }
-    openDrawer() {
-        this[uiRefs.drawer].open = true;
     }
 }
 SwagTagCatalogMWC.is = 'swag-tag-catalog-mwc';
