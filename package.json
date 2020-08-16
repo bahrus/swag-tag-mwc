@@ -12,7 +12,6 @@
   "dependencies": {
     "trans-render": "0.0.255",
     "xtal-element": "0.0.282",
-    "xtal-fetch": "0.0.83",
     "@material/mwc-textarea": "0.18.0",
     "@material/mwc-formfield": "0.18.0",
     "@material/mwc-checkbox": "0.18.0",
