@@ -6,12 +6,12 @@
   "module": "swag-tag-mwc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "es-dev-server --app-index demo/dev.html --node-resolve --watch --open",
+    "start": "es-dev-server --app-index demo/dev-catalog.html --node-resolve --watch --open",
     "example1": "wca analyze mwc-textfield-example1.js --outFile mwc-textfield-example1.json"
   },
   "dependencies": {
-    "trans-render": "0.0.246",
-    "xtal-element": "0.0.274",
+    "trans-render": "0.0.255",
+    "xtal-element": "0.0.282",
     "xtal-fetch": "0.0.83",
     "@material/mwc-textarea": "0.18.0",
     "@material/mwc-formfield": "0.18.0",
@@ -22,7 +22,7 @@
     "@material/mwc-drawer": "0.18.0",
     "@material/mwc-top-app-bar": "0.18.0",
     "@material/mwc-icon-button": "0.18.0",
-    "swag-tag": "0.0.29",
+    "swag-tag": "0.0.31",
     "p-et-alia": "0.0.112"
   },
   "devDependencies": {

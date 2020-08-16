@@ -1,7 +1,6 @@
 
 import { XtalElement, define, AttributeProps, TransformGetter, SelectiveUpdate, RenderContext, symbolize, p } from 'xtal-element/XtalElement.js';
 import { createTemplate } from 'trans-render/createTemplate.js';
-import('xtal-fetch/xtal-fetch-req.js');
 import { templStampSym } from 'trans-render/plugins/templStamp.js';
 import { TransformValueOptions } from 'trans-render/types.d.js';
 import('./swag-tag-mwc.js');
@@ -109,7 +108,7 @@ const mainTemplate = createTemplate(/* html */`
 </mwc-drawer>
     
 `);
-const uiRefs = { fetch: p, linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p, navigationIcon: p, codeLink: p, documentationLink: p };
+const uiRefs = { linksSlot: p, mwcButtonContainer: p, appContent: p, drawer: p, navigationIcon: p, codeLink: p, documentationLink: p };
 symbolize(uiRefs);
 const initTransform = ({ onLinksSlotChange, onLinkButtonClick }: SwagTagCatalogMWC) => ({
     ':host': [templStampSym, uiRefs],
