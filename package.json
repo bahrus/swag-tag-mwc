@@ -2,8 +2,8 @@
   "name": "swag-tag-mwc",
   "version": "0.0.5",
   "description": "Demo web components using mwc material \"design language\"",
-  "main": "swag-tag-mwc.js",
-  "module": "swag-tag-mwc.js",
+  "main": "index.js",
+  "module": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "es-dev-server --app-index demo/dev-catalog.html --node-resolve --watch --open",
