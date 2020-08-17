@@ -1,6 +1,6 @@
 {
   "name": "swag-tag-mwc",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Demo web components using mwc material \"design language\"",
   "main": "index.js",
   "module": "index.js",
