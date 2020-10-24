@@ -9,7 +9,10 @@ import('@material/mwc-icon-button/mwc-icon-button.js');
 import('@material/mwc-drawer/mwc-drawer.js');
 import('p-et-alia/p-d.js');
 import('p-et-alia/p-u.js');
+import {preemptiveImport} from 'xtal-sip/preemptiveImport.js';
 
+preemptiveImport(['RobotoFont',,'//fonts.googleapis.com/css?family=Roboto:300,400,500',,{cssScope: 'global'}])
+preemptiveImport(['MaterialIconsFont',,'https://fonts.googleapis.com/css?family=Material+Icons&amp;display=block',,{cssScope: 'global'}])
 const mainTemplate = createTemplate(/* html */`
 <style>
     :host {
