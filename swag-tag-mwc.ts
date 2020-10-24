@@ -1,7 +1,6 @@
 import {
   SwagTag, uiRefs, bindName, addEventListeners, linkWcInfo, triggerImportReferencedModule, 
   adjustValueAndType, bindSelf, showHideEditor, linkInnerTemplate, copyPropInfoIntoEditor} from 'swag-tag/swag-tag.js';
-import { WCSuiteInfo, WCInfo, PropertyInfo, CustomEventInfo, SlotInfo, AttribInfo } from "wc-info/types.js";
 import {define} from 'xtal-element/XtalElement.js';
 import {RenderContext, PEATSettings} from 'trans-render/types.d.js';
 import {SwagTagMWCTextField} from './lib/swag-tag-mwc-textfield.js';
