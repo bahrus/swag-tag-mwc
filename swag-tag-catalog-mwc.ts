@@ -4,11 +4,6 @@ import { createTemplate } from 'trans-render/createTemplate.js';
 import { templStampSym } from 'trans-render/plugins/templStamp.js';
 import { TransformValueOptions } from 'trans-render/types.d.js';
 import('./swag-tag-mwc.js');
-// import('@material/mwc-top-app-bar/mwc-top-app-bar.js');
-// import('@material/mwc-icon-button/mwc-icon-button.js');
-// import('@material/mwc-drawer/mwc-drawer.js');
-import('p-et-alia/p-d.js');
-import('p-et-alia/p-u.js');
 import {preemptiveImport} from 'xtal-sip/preemptiveImport.js';
 import {conditionalImport} from 'xtal-sip/conditionalImport.js';
 
@@ -128,6 +123,13 @@ const linkLinks = ({ linkAssignedNodes, self }: SwagTagCatalogMWC) => {
                 ({localName}) => `@material/${localName}/${localName}.js`, 
                 [() => import('@material/mwc-top-app-bar/mwc-top-app-bar.js'), () => import('@material/mwc-icon-button/mwc-icon-button.js'), () => import('@material/mwc-drawer/mwc-drawer.js')],
                 ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
+            ]
+        ],
+        'p-{d|u}':[
+            [
+                ({localName}) => `p-et-alia/${localName}.js`,
+                [() => import('p-et-alia/p-d.js'), () => import('p-et-alia/p-u.js')],
+                ({localName}) => `//unpkg.com/p-et-alia/${localName}.js?module`
             ]
         ]
     });
