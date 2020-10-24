@@ -23,7 +23,7 @@
     "@material/mwc-icon-button": "0.19.1",
     "swag-tag": "0.0.40",
     "p-et-alia": "0.0.118",
-    "xtal-sip": "0.0.105"
+    "xtal-sip": "0.0.110"
   },
   "devDependencies": {
     "@web/dev-server": "0.0.15"

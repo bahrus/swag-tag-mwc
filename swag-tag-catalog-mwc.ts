@@ -4,12 +4,13 @@ import { createTemplate } from 'trans-render/createTemplate.js';
 import { templStampSym } from 'trans-render/plugins/templStamp.js';
 import { TransformValueOptions } from 'trans-render/types.d.js';
 import('./swag-tag-mwc.js');
-import('@material/mwc-top-app-bar/mwc-top-app-bar.js');
-import('@material/mwc-icon-button/mwc-icon-button.js');
-import('@material/mwc-drawer/mwc-drawer.js');
+// import('@material/mwc-top-app-bar/mwc-top-app-bar.js');
+// import('@material/mwc-icon-button/mwc-icon-button.js');
+// import('@material/mwc-drawer/mwc-drawer.js');
 import('p-et-alia/p-d.js');
 import('p-et-alia/p-u.js');
 import {preemptiveImport} from 'xtal-sip/preemptiveImport.js';
+import {conditionalImport} from 'xtal-sip/conditionalImport.js';
 
 preemptiveImport(['RobotoFont',,'//fonts.googleapis.com/css?family=Roboto:300,400,500',,{cssScope: 'global'}])
 preemptiveImport(['MaterialIconsFont',,'https://fonts.googleapis.com/css?family=Material+Icons&amp;display=block',,{cssScope: 'global'}])
@@ -121,6 +122,15 @@ const initTransform = ({ onLinksSlotChange, onLinkButtonClick }: SwagTagCatalogM
 } as TransformValueOptions);
 
 const linkLinks = ({ linkAssignedNodes, self }: SwagTagCatalogMWC) => {
+    conditionalImport(self.shadowRoot!,{
+        'mwc-{top-app-bar|icon-button|drawer}':[
+            [
+                ({localName}) => `@material/${localName}/${localName}.js`, 
+                [() => import('@material/mwc-top-app-bar/mwc-top-app-bar.js'), () => import('@material/mwc-icon-button/mwc-icon-button.js'), () => import('@material/mwc-drawer/mwc-drawer.js')],
+                ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
+            ]
+        ]
+    });
     const links: HTMLAnchorElement[] = [];
     Array.from(linkAssignedNodes!).forEach(node => {
         if((<any>node).querySelectorAll) {
