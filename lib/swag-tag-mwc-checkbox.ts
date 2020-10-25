@@ -58,8 +58,9 @@ export class SwagTagMWCCheckbox extends SwagTagPrimitiveBase{
 
     propActions = [];
     _didImport = false;
-    afterUpdateRenderCallback(){
-        if(this._didImport) return;
+    get root(): HTMLElement | ShadowRoot{
+        const s = super.root;
+        if(this._didImport) return s;
         this._didImport = true;
         conditionalImport(this.shadowRoot!,{
             'mwc-{textfield}':[
@@ -70,6 +71,7 @@ export class SwagTagMWCCheckbox extends SwagTagPrimitiveBase{
                 ]
             ]
         });
+        return s;
     }
 }
 define(SwagTagMWCCheckbox);
