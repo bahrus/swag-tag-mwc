@@ -28,6 +28,7 @@ export class MWCTextFieldExample1 extends TextField {
         this.validity = '';
         this.selectionStart = 0;
         this.selectionEnd = 1000;
+        this.styles = {};
     }
 }
 customElements.define('mwc-textfield-example1', MWCTextFieldExample1);

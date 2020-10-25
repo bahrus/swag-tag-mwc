@@ -158,7 +158,14 @@ const bindLinks = ({ links }) => ({
                             info: item.dataset.info
                         }
                     }],
-                'span': [{ textContent: item.textContent }],
+                'span': [{
+                        textContent: item.textContent,
+                        dataset: {
+                            href: item.href,
+                            code: item.dataset.code,
+                            info: item.dataset.info
+                        }
+                    }],
             })
         }],
 });
