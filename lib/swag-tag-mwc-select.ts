@@ -1,8 +1,9 @@
 import {SwagTagPrimitiveBase} from 'swag-tag/lib/swag-tag-primitive-base.js';
 import {define, AttributeProps, mergeProps, RenderContext, SelectiveUpdate} from 'xtal-element/XtalElement.js';
 import {createTemplate} from 'trans-render/createTemplate.js';
-import("@material/mwc-select/mwc-select.js");
-import("@material/mwc-list/mwc-list-item.js");
+import {conditionalImport} from 'xtal-sip/conditionalImport.js';
+// import("@material/mwc-select/mwc-select.js");
+// import("@material/mwc-list/mwc-list-item.js");
 
 const mainTemplate = createTemplate(/* html */`
   <style>
@@ -52,5 +53,22 @@ export class SwagTagMWCSelect extends SwagTagPrimitiveBase{
         this.editedValue = (<any>e.target!).value;
     }
     options: string[] | undefined;
+    _didImport = false;
+    get root(): HTMLElement | ShadowRoot{
+        const s = super.root;
+        if(this._didImport) return s;
+        this._didImport = true;
+        conditionalImport(this.shadowRoot!,{
+            'mwc-{select|list-item}':[
+                [
+                    ({localName}) => `@material/${localName!.replace('-item','')}/${localName}.js`, 
+                    [() => import("@material/mwc-select/mwc-select.js"), () => import("@material/mwc-list/mwc-list-item.js")],
+                    ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
+                ]
+            ]
+        });
+        return s;
+    }
+
 }
 define(SwagTagMWCSelect);

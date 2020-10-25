@@ -2,7 +2,7 @@ import {SwagTagPrimitiveBase} from 'swag-tag/lib/swag-tag-primitive-base.js';
 import {SelectiveUpdate} from 'xtal-element/types.d.js';
 import {define} from 'xtal-element/XtalElement.js';
 import {createTemplate} from 'trans-render/createTemplate.js';
-import ("@material/mwc-textfield/mwc-textfield.js");
+import {conditionalImport} from 'xtal-sip/conditionalImport.js';
 
 const mainTemplate = createTemplate(/* html */`
   <style>
@@ -47,7 +47,7 @@ export const linkEditedValue = ({value, self}: SwagTagMWCTextField) => {
 
 const propActions = [
     linkInputType, linkEditedValue
-];
+] as any;
 
 export class SwagTagMWCTextField extends SwagTagPrimitiveBase{
     static is = 'swag-tag-mwc-textfield';
@@ -59,5 +59,20 @@ export class SwagTagMWCTextField extends SwagTagPrimitiveBase{
     updateTransforms = updateTransforms
 
     propActions = propActions;
+
+    _didImport = false;
+    afterUpdateRenderCallback(){
+        if(this._didImport) return;
+        this._didImport = true;
+        conditionalImport(this.shadowRoot!,{
+            'mwc-{check-box|formfield}':[
+                [
+                    ({localName}) => `@material/${localName}/${localName}.js`, 
+                    [() => import("@material/mwc-checkbox/mwc-checkbox.js"), () => import("@material/mwc-formfield/mwc-formfield.js")],
+                    ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
+                ]
+            ]
+        });
+    }
 }
 define(SwagTagMWCTextField);
