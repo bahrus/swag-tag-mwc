@@ -11,6 +11,9 @@ const mainTemplate = createTemplate(/* html */ `
     :host {
         height: 100vh;
     }
+    a{
+        cursor:pointer;
+    }
 
     .drawer-content {
         padding: 0px 16px 0 16px;
@@ -144,7 +147,7 @@ const propActions = [
 ];
 const drawerButton = createTemplate(/* html */ `
 <div part=buttonContainer>
-    <mwc-icon-button icon="device_hub"></mwc-icon-button><span></span>
+    <mwc-icon-button icon="device_hub"></mwc-icon-button><a></a>
 </div>
 `);
 const bindLinks = ({ links }) => ({
@@ -158,7 +161,7 @@ const bindLinks = ({ links }) => ({
                             info: item.dataset.info
                         }
                     }],
-                'span': [{
+                'a': [{
                         textContent: item.textContent,
                         dataset: {
                             href: item.href,
