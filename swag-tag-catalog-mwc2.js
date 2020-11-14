@@ -1,13 +1,10 @@
-import { XtalElement, define, AttributeProps, TransformGetter, SelectiveUpdate, RenderContext, symbolize, p, TransformValueOptions } from 'xtal-element/XtalElement.js';
+import { XtalElement, define } from 'xtal-element/XtalElement.js';
 import { createTemplate } from 'trans-render/createTemplate.js';
-import {preemptiveImport} from 'xtal-sip/preemptiveImport.js';
-import {conditionalImport} from 'xtal-sip/conditionalImport.js';
-
-preemptiveImport(['RobotoFont',,'//fonts.googleapis.com/css?family=Roboto:300,400,500',,{cssScope: 'global'}]);
-preemptiveImport(['MaterialIconsFont',,'https://fonts.googleapis.com/css?family=Material+Icons&amp;display=block',,{cssScope: 'global'}]);
-
-
-export const mainTemplate = createTemplate(/* html */`
+import { preemptiveImport } from 'xtal-sip/preemptiveImport.js';
+import { conditionalImport } from 'xtal-sip/conditionalImport.js';
+preemptiveImport(['RobotoFont', , '//fonts.googleapis.com/css?family=Roboto:300,400,500', , { cssScope: 'global' }]);
+preemptiveImport(['MaterialIconsFont', , 'https://fonts.googleapis.com/css?family=Material+Icons&amp;display=block', , { cssScope: 'global' }]);
+export const mainTemplate = createTemplate(/* html */ `
     <style>
         ::slotted(iframe){
             height: 900px;
@@ -43,35 +40,28 @@ export const mainTemplate = createTemplate(/* html */`
     
     
 `);
-const initTransform = ({}: SwagTagCatalogMWC) => ({
-   
-} as TransformValueOptions);
+const initTransform = ({}) => ({});
 export class SwagTagCatalogMWC extends XtalElement {
-    static is = 'swag-tag-catalog-mwc';
-
-    mainTemplate = mainTemplate;
-    readyToInit = true;
-    initTransform = initTransform;
-    readyToRender = true;
-    get root(){
+    constructor() {
+        super(...arguments);
+        this.mainTemplate = mainTemplate;
+        this.readyToInit = true;
+        this.initTransform = initTransform;
+        this.readyToRender = true;
+    }
+    get root() {
         const r = super.root;
-        conditionalImport(r,{
-            'mwc-{top-app-bar|icon-button|drawer}':[
+        conditionalImport(r, {
+            'mwc-{top-app-bar|icon-button|drawer}': [
                 [
-                    ({localName}) => `@material/${localName}/${localName}.js`, 
+                    ({ localName }) => `@material/${localName}/${localName}.js`,
                     [() => import('@material/mwc-top-app-bar/mwc-top-app-bar.js'), () => import('@material/mwc-icon-button/mwc-icon-button.js'), () => import('@material/mwc-drawer/mwc-drawer.js')],
-                    ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
+                    ({ localName }) => `//unpkg.com/@material/${localName}/${localName}.js?module`
                 ]
             ],
-            // 'p-{d|u}':[
-            //     [
-            //         ({localName}) => `p-et-alia/${localName}.js`,
-            //         [() => import('p-et-alia/p-d.js'), () => import('p-et-alia/p-u.js')],
-            //         ({localName}) => `//unpkg.com/p-et-alia/${localName}.js?module`
-            //     ]
-            // ]
         });
         return r;
     }
 }
+SwagTagCatalogMWC.is = 'swag-tag-catalog-mwc';
 define(SwagTagCatalogMWC);
