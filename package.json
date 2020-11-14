@@ -10,8 +10,8 @@
     "example1": "wca analyze mwc-textfield-example1.js --outFile mwc-textfield-example1.json"
   },
   "dependencies": {
-    "trans-render": "0.0.267",
-    "xtal-element": "0.0.310",
+    "trans-render": "0.0.269",
+    "xtal-element": "0.0.314",
     "@material/mwc-textarea": "0.19.1",
     "@material/mwc-formfield": "0.19.1",
     "@material/mwc-checkbox": "0.19.1",
