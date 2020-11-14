@@ -10,7 +10,28 @@ preemptiveImport(['MaterialIconsFont',,'https://fonts.googleapis.com/css?family=
 export const mainTemplate = createTemplate(/* html */`
     <style>
         ::slotted(iframe){
-            height: 900px;
+            height: 100%;
+            width: 100%;
+        }
+        :host{
+            display:flex;
+            height: 100%;
+            width: 100%;
+        }
+         
+        .appContent {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            background-color: yellow;
+            overflow: hidden; /* TODO, alternative */
+        }
+        mwc-drawer{
+            width: 100%;
+        }
+        .main-content {
+            flex-grow:100;
         }
     </style>
     <mwc-drawer hasheader type="modal" open part=drawer>
@@ -26,7 +47,7 @@ export const mainTemplate = createTemplate(/* html */`
         <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of='[icon="code"][-data-href]' val=target.dataset.code as-attr></p-d>
         <p-d on=click from="[part='drawerContent']" to="[part='appContent']" care-of='[icon="info"][-data-href]' val=target.dataset.info as-attr></p-d> -->
     </div>
-    <div slot="appContent" part=appContent>
+    <div slot=appContent part=appContent class=appContent>
         <mwc-top-app-bar>
             <mwc-icon-button slot="navigationIcon" icon="menu" part=navigationIcon data-msg1=true></mwc-icon-button>
             <p-u on=click to-closest=mwc-drawer val=target.dataset.msg1 prop=open parse-value-as=bool></p-u>
@@ -63,13 +84,13 @@ export class SwagTagCatalogMWC extends XtalElement {
                     ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
                 ]
             ],
-            // 'p-{d|u}':[
-            //     [
-            //         ({localName}) => `p-et-alia/${localName}.js`,
-            //         [() => import('p-et-alia/p-d.js'), () => import('p-et-alia/p-u.js')],
-            //         ({localName}) => `//unpkg.com/p-et-alia/${localName}.js?module`
-            //     ]
-            // ]
+            'p-{d|u}':[
+                [
+                    ({localName}) => `p-et-alia/${localName}.js`,
+                    [() => import('p-et-alia/p-d.js'), () => import('p-et-alia/p-u.js')],
+                    ({localName}) => `//unpkg.com/p-et-alia/${localName}.js?module`
+                ]
+            ]
         });
         return r;
     }
