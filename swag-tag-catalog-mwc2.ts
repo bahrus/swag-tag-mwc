@@ -41,6 +41,9 @@ export const mainTemplate = createTemplate(/* html */`
         .drawer-content {
             margin-left: 15px;
         }
+        .top--icon {
+            color: white;
+        }
     </style>
     <mwc-drawer hasheader type="modal" open part=drawer>
      
@@ -62,8 +65,13 @@ export const mainTemplate = createTemplate(/* html */`
             <p-u on=click to-closest=mwc-drawer val=target.dataset.msg1 prop=open parse-value-as=bool></p-u>
             <p-h-d to=[-text-content] m=1 id=titlePass></p-h-d>
             <div slot="title" -text-content>Title</div>
-            <mwc-icon-button slot="actionItems" icon="code" title="Code Repository" role=link part=codeLink -data-href></mwc-icon-button>
-            <mwc-icon-button slot="actionItems" icon="info" title="Documentation" role=link part=documentationLink -data-href></mwc-icon-button>
+            
+            <a href="//cnn.com" target=_blank slot="actionItems">
+                <mwc-icon title="Code Repository" class=top--icon>code</mwc-icon>
+            </a>
+            <a href="//foxnews.com" target=_blank slot="actionItems">
+                <mwc-icon title="Documentation" class=top--icon>info</mwc-icon>
+            </a>
         </mwc-top-app-bar>
         <div class="main-content">
             <slot name=iframe></slot>
@@ -99,10 +107,15 @@ export class SwagTagCatalogMWC extends XtalElement {
     get root(){
         const r = super.root;
         conditionalImport(r,{
-            'mwc-{top-app-bar|icon-button|drawer}':[
+            'mwc-{top-app-bar|icon-button|drawer|icon}':[
                 [
                     ({localName}) => `@material/${localName}/${localName}.js`, 
-                    [() => import('@material/mwc-top-app-bar/mwc-top-app-bar.js'), () => import('@material/mwc-icon-button/mwc-icon-button.js'), () => import('@material/mwc-drawer/mwc-drawer.js')],
+                    [
+                        () => import('@material/mwc-top-app-bar/mwc-top-app-bar.js'), 
+                        () => import('@material/mwc-icon-button/mwc-icon-button.js'), 
+                        () => import('@material/mwc-drawer/mwc-drawer.js'),
+                        () => import('@material/mwc-icon/mwc-icon.js')
+                    ],
                     ({localName}) => `//unpkg.com/@material/${localName}/${localName}.js?module`
                 ]
             ],
