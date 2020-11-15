@@ -14,6 +14,10 @@ export const mainTemplate = createTemplate(/* html */`
             height: 100%;
             width: 100%;
         }
+        ::slotted(nav){
+            display: flex;
+            flex-direction: column;
+        }
         :host{
             display:flex;
             height: 100%;
@@ -33,6 +37,9 @@ export const mainTemplate = createTemplate(/* html */`
         }
         .main-content {
             flex-grow:100;
+        }
+        .drawer-content {
+            margin-left: 15px;
         }
     </style>
     <mwc-drawer hasheader type="modal" open part=drawer>
