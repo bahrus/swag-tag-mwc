@@ -69,7 +69,8 @@ export const mainTemplate = createTemplate(/* html */`
             <a -href target=_blank slot="actionItems">
                 <mwc-icon title="Code Repository" class=top--icon>code</mwc-icon>
             </a>
-            <a href="//foxnews.com" target=_blank slot="actionItems">
+            <p-h-d to=[-href] m=1 id=docPass></p-h-d>
+            <a -href target=_blank slot="actionItems">
                 <mwc-icon title="Documentation" class=top--icon>info</mwc-icon>
             </a>
         </mwc-top-app-bar>
@@ -80,15 +81,16 @@ export const mainTemplate = createTemplate(/* html */`
     
 </mwc-drawer> 
 `);
-const refs = {titlePass: p, codePass: p};
+const refs = {titlePass: p, codePass: p, docPass: p};
 symbolize(refs);
 const initTransform = ({}: SwagTagCatalogMWC) => ({
    ':host': [templStampSym, refs]
 } as TransformValueOptions);
 
-const bindTitle = ({statePathForTitle, statePathForCode}: SwagTagCatalogMWC) => ({
+const bindTitle = ({statePathForTitle, statePathForCode, statePathForDoc}: SwagTagCatalogMWC) => ({
     [refs.titlePass]: [{fromPath:statePathForTitle}],
-    [refs.codePass]: [{fromPath:statePathForCode}]
+    [refs.codePass]: [{fromPath:statePathForCode}],
+    [refs.docPass]: [{fromPath: statePathForDoc}]
 });
 const updateTransforms = [
     bindTitle
@@ -96,8 +98,8 @@ const updateTransforms = [
 export class SwagTagCatalogMWC extends XtalElement {
     static is = 'swag-tag-catalog-mwc';
 
-    static attributeProps = ({statePathForTitle, statePathForCode}: SwagTagCatalogMWC) => ({
-        str: [statePathForTitle, statePathForCode]
+    static attributeProps = ({statePathForTitle, statePathForCode, statePathForDoc}: SwagTagCatalogMWC) => ({
+        str: [statePathForTitle, statePathForCode, statePathForDoc]
     } as AttributeProps);
 
     mainTemplate = mainTemplate;
@@ -133,5 +135,6 @@ export class SwagTagCatalogMWC extends XtalElement {
 
     statePathForTitle: string | undefined;
     statePathForCode: string | undefined;
+    statePathForDoc: string | undefined;
 }
 define(SwagTagCatalogMWC);
