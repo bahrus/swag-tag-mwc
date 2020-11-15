@@ -12,15 +12,23 @@
         }
         swag-tag-catalog-mwc {
             height: 100vh;
-            background-color: red;
+        }
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            body{
+                background-color: black;
+            }
         }
     </style>
 </head>
 
 <body>
     <re-src></re-src>
-    <swag-tag-catalog-mwc state-path-for-title="reSrc.componentViewer.textContent">
-        
+    <swag-tag-catalog-mwc 
+        state-path-for-title="reSrc.componentViewer.textContent" 
+        state-path-for-code="reSrc.componentViewer.code">
+
         <nav be-persistable slot=linkList>
             <a href=dev-mwc-mwc-textfield.html 
             data-code=https://github.com/material-components/material-components-web-components/tree/master/packages/textfield 

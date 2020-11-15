@@ -29,7 +29,6 @@ export const mainTemplate = createTemplate(/* html */`
             flex-direction: column;
             height: 100%;
             width: 100%;
-            background-color: yellow;
             overflow: hidden; /* TODO, alternative */
         }
         mwc-drawer{
@@ -45,6 +44,7 @@ export const mainTemplate = createTemplate(/* html */`
             color: white;
         }
     </style>
+
     <mwc-drawer hasheader type="modal" open part=drawer>
      
     <span slot="title">Catalog</span>
@@ -65,8 +65,8 @@ export const mainTemplate = createTemplate(/* html */`
             <p-u on=click to-closest=mwc-drawer val=target.dataset.msg1 prop=open parse-value-as=bool></p-u>
             <p-h-d to=[-text-content] m=1 id=titlePass></p-h-d>
             <div slot="title" -text-content>Title</div>
-            
-            <a href="//cnn.com" target=_blank slot="actionItems">
+            <p-h-d to=[-href] m=1 id=codePass></p-h-d>
+            <a -href target=_blank slot="actionItems">
                 <mwc-icon title="Code Repository" class=top--icon>code</mwc-icon>
             </a>
             <a href="//foxnews.com" target=_blank slot="actionItems">
@@ -80,14 +80,15 @@ export const mainTemplate = createTemplate(/* html */`
     
 </mwc-drawer> 
 `);
-const refs = {titlePass: p};
+const refs = {titlePass: p, codePass: p};
 symbolize(refs);
 const initTransform = ({}: SwagTagCatalogMWC) => ({
    ':host': [templStampSym, refs]
 } as TransformValueOptions);
 
-const bindTitle = ({statePathForTitle}: SwagTagCatalogMWC) => ({
-    [refs.titlePass]: [{fromPath:statePathForTitle}]
+const bindTitle = ({statePathForTitle, statePathForCode}: SwagTagCatalogMWC) => ({
+    [refs.titlePass]: [{fromPath:statePathForTitle}],
+    [refs.codePass]: [{fromPath:statePathForCode}]
 });
 const updateTransforms = [
     bindTitle
@@ -95,8 +96,8 @@ const updateTransforms = [
 export class SwagTagCatalogMWC extends XtalElement {
     static is = 'swag-tag-catalog-mwc';
 
-    static attributeProps = ({statePathForTitle}: SwagTagCatalogMWC) => ({
-        str: [statePathForTitle]
+    static attributeProps = ({statePathForTitle, statePathForCode}: SwagTagCatalogMWC) => ({
+        str: [statePathForTitle, statePathForCode]
     } as AttributeProps);
 
     mainTemplate = mainTemplate;
@@ -131,5 +132,6 @@ export class SwagTagCatalogMWC extends XtalElement {
     }
 
     statePathForTitle: string | undefined;
+    statePathForCode: string | undefined;
 }
 define(SwagTagCatalogMWC);
