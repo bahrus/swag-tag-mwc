@@ -1,7 +1,8 @@
-import { XtalElement, define } from 'xtal-element/XtalElement.js';
+import { XtalElement, define, symbolize, p } from 'xtal-element/XtalElement.js';
 import { createTemplate } from 'trans-render/createTemplate.js';
 import { preemptiveImport } from 'xtal-sip/preemptiveImport.js';
 import { conditionalImport } from 'xtal-sip/conditionalImport.js';
+import { templStampSym } from 'trans-render/plugins/templStamp.js';
 preemptiveImport(['RobotoFont', , '//fonts.googleapis.com/css?family=Roboto:300,400,500', , { cssScope: 'global' }]);
 preemptiveImport(['MaterialIconsFont', , 'https://fonts.googleapis.com/css?family=Material+Icons&amp;display=block', , { cssScope: 'global' }]);
 export const mainTemplate = createTemplate(/* html */ `
@@ -32,6 +33,7 @@ export const mainTemplate = createTemplate(/* html */ `
         }
     </style>
     <mwc-drawer hasheader type="modal" open part=drawer>
+     
     <span slot="title">Catalog</span>
     <span slot="subtitle">components</span>
     <div class="drawer-content" part=drawerContent>
@@ -48,6 +50,7 @@ export const mainTemplate = createTemplate(/* html */ `
         <mwc-top-app-bar>
             <mwc-icon-button slot="navigationIcon" icon="menu" part=navigationIcon data-msg1=true></mwc-icon-button>
             <p-u on=click to-closest=mwc-drawer val=target.dataset.msg1 prop=open parse-value-as=bool></p-u>
+            <p-h-d to=[-text-content] m=1 id=titlePass></p-h-d>
             <div slot="title" -text-content>Title</div>
             <mwc-icon-button slot="actionItems" icon="code" title="Code Repository" role=link part=codeLink -data-href></mwc-icon-button>
             <mwc-icon-button slot="actionItems" icon="info" title="Documentation" role=link part=documentationLink -data-href></mwc-icon-button>
@@ -57,17 +60,26 @@ export const mainTemplate = createTemplate(/* html */ `
         </div>
     </div>
     
-</mwc-drawer>
-    
-    
+</mwc-drawer> 
 `);
-const initTransform = ({}) => ({});
+const refs = { titlePass: p };
+symbolize(refs);
+const initTransform = ({}) => ({
+    ':host': [templStampSym, refs]
+});
+const bindTitle = ({ statePathForTitle }) => ({
+    [refs.titlePass]: [{ fromPath: statePathForTitle }]
+});
+const updateTransforms = [
+    bindTitle
+];
 export class SwagTagCatalogMWC extends XtalElement {
     constructor() {
         super(...arguments);
         this.mainTemplate = mainTemplate;
         this.readyToInit = true;
         this.initTransform = initTransform;
+        this.updateTransforms = updateTransforms;
         this.readyToRender = true;
     }
     get root() {
@@ -80,10 +92,10 @@ export class SwagTagCatalogMWC extends XtalElement {
                     ({ localName }) => `//unpkg.com/@material/${localName}/${localName}.js?module`
                 ]
             ],
-            'p-{d|u}': [
+            'p-{d|u|h-d}': [
                 [
                     ({ localName }) => `p-et-alia/${localName}.js`,
-                    [() => import('p-et-alia/p-d.js'), () => import('p-et-alia/p-u.js')],
+                    [() => import('p-et-alia/p-d.js'), () => import('p-et-alia/p-u.js'), () => import('p-et-alia/p-h-d.js')],
                     ({ localName }) => `//unpkg.com/p-et-alia/${localName}.js?module`
                 ]
             ]
@@ -92,4 +104,7 @@ export class SwagTagCatalogMWC extends XtalElement {
     }
 }
 SwagTagCatalogMWC.is = 'swag-tag-catalog-mwc';
+SwagTagCatalogMWC.attributeProps = ({ statePathForTitle }) => ({
+    str: [statePathForTitle]
+});
 define(SwagTagCatalogMWC);
