@@ -28,7 +28,8 @@
   },
   "devDependencies": {
     "@web/dev-server": "0.0.15",
-    "re-src": "0.0.2"
+    "re-src": "0.0.3",
+    "at-most-one": "0.0.1"
   },
   "repository": {
     "type": "git",
