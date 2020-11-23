@@ -13,6 +13,14 @@
         swag-tag-catalog-mwc {
             height: 100vh;
         }
+        iframe{
+            position:absolute;
+            left: -20000px;
+        }
+        iframe[data-selected]{
+            position:static;
+
+        }
     </style>
     <style>
         @media (prefers-color-scheme: dark) {
@@ -25,25 +33,31 @@
 
 <body>
     <re-src></re-src>
-    <swag-tag-catalog-mwc 
-        state-path-for-title="reSrc.componentViewer.textContent" 
-        state-path-for-code="reSrc.componentViewer.code"
-        state-path-for-doc="reSrc.componentViewer.info"
-    >
+    <target-caching></target-caching>
+    <at-most-one attribute="data-selected">
+        <swag-tag-catalog-mwc 
+            state-path-for-title="reSrc.componentViewer.textContent" 
+            state-path-for-code="reSrc.componentViewer.code"
+            state-path-for-doc="reSrc.componentViewer.info"
+        >
 
-        <nav be-persistable slot=linkList>
-            <a href=dev-mwc-mwc-textfield.html 
-            data-code=https://github.com/material-components/material-components-web-components/tree/master/packages/textfield 
-            data-info=https://www.npmjs.com/package/@material/mwc-textfield target=componentViewer
-            >mwc-textfield</a>
-            <a href=dev.html title=textfield target=componentViewer>xtal-frappe-chart</a>
-        </nav>
+            <nav be-persistable='{"group":"componentViewer"}' slot=linkList>
+                <a be-target-caching href=dev-mwc-mwc-textfield.html 
+                data-code=https://github.com/material-components/material-components-web-components/tree/master/packages/textfield 
+                data-info=https://www.npmjs.com/package/@material/mwc-textfield target=componentViewerA
+                >mwc-textfield</a>
+                <a be-target-caching href=dev.html title=textfield target=componentViewerB>xtal-frappe-chart</a>
+            </nav>
 
-        <iframe slot=iframe name=componentViewer></iframe>
-    </swag-tag-catalog-mwc>
+            <iframe slot=iframe name=componentViewerA></iframe>
+            <iframe slot=iframe name=componentViewerB></iframe>
+        </swag-tag-catalog-mwc>
+    </at-most-one>
     <script type=module src=../swag-tag-catalog-mwc2.js></script>
     <script type=module>
         import 're-src/re-src.js';
+        import 're-src/target-caching.js';
+        import 'at-most-one/at-most-one.js';
     </script>
 </body>
 
